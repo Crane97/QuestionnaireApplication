@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QuestionnaireApplication.models
 {
@@ -6,6 +7,8 @@ namespace QuestionnaireApplication.models
     public class User
     {
         public User() { }
+
+        [Key]
         public int Id { get; set; }
         public string Email { get; set; }
     }

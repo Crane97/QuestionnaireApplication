@@ -21,7 +21,12 @@ namespace QuestionnaireApplication.services
 
         public Question PostQuestion(Question question)
         {
-            repository.Add(question);
+            repository.Questions.Add(question);
+            foreach (Answer answer in question.AnswerText)
+            {
+                repository.Answers.Add(answer);
+            }
+            repository.SaveChanges();
             return question;
         }
 

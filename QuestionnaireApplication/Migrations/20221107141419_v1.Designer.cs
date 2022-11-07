@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QuestionnaireApplication.repositories;
 
@@ -10,9 +11,10 @@ using QuestionnaireApplication.repositories;
 namespace QuestionnaireApplication.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20221107141419_v1")]
+    partial class v1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -79,17 +81,17 @@ namespace QuestionnaireApplication.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("QuestionIdId")
+                    b.Property<int>("QuestionId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserIdId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("QuestionIdId");
+                    b.HasIndex("QuestionId");
 
-                    b.HasIndex("UserIdId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("useranswer");
                 });
@@ -103,21 +105,21 @@ namespace QuestionnaireApplication.Migrations
 
             modelBuilder.Entity("QuestionnaireApplication.models.UserAnswer", b =>
                 {
-                    b.HasOne("QuestionnaireApplication.models.Question", "QuestionId")
+                    b.HasOne("QuestionnaireApplication.models.Question", "Question")
                         .WithMany()
-                        .HasForeignKey("QuestionIdId")
+                        .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("QuestionnaireApplication.models.User", "UserId")
+                    b.HasOne("QuestionnaireApplication.models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserIdId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("QuestionId");
+                    b.Navigation("Question");
 
-                    b.Navigation("UserId");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("QuestionnaireApplication.models.Question", b =>

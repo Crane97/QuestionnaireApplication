@@ -28,7 +28,7 @@ namespace QuestionnaireApplication.Controllers
             return service.Get();
         }
 
-        [HttpPost(Name = "add")]
+        [HttpPost(Name = "addQuestion")]
         public Question Post(Question question)
         {
             return service.PostQuestion(question);
