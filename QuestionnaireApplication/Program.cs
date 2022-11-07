@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using QuestionnaireApplication.repositories;
+using QuestionnaireApplication.repositories.Implementation;
 using QuestionnaireApplication.services;
+using QuestionnaireApplication.services.interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +15,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService,UserService>();
 
 var app = builder.Build();
 

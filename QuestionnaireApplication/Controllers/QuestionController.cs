@@ -1,12 +1,37 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using QuestionnaireApplication.models;
+using QuestionnaireApplication.repositories;
+using QuestionnaireApplication.services;
+using QuestionnaireApplication.services.interfaces;
 
 namespace QuestionnaireApplication.Controllers
 {
-    public class QuestionController : Controller
+    [ApiController]
+    [Route("/api/[controller]")]
+    public class QuestionController : ControllerBase
     {
-        public IActionResult Index()
+        private readonly IQuestionService service;
+
+        public QuestionController(IQuestionService service)
         {
-            return View();
+            this.service = service;
+        }
+
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
+
+        [HttpGet(Name = "GetQuestions")]
+        public IEnumerable<Question> Get()
+        {
+            return service.Get();
+        }
+
+        [HttpPost(Name = "add")]
+        public Question Post(Question question)
+        {
+            return service.PostQuestion(question);
         }
     }
 }
