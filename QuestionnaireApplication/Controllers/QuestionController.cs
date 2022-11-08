@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using QuestionnaireApplication.models;
 using QuestionnaireApplication.repositories;
 using QuestionnaireApplication.services;
@@ -8,6 +9,7 @@ namespace QuestionnaireApplication.Controllers
 {
     [ApiController]
     [Route("/api/[controller]")]
+    [EnableCors]
     public class QuestionController : ControllerBase
     {
         private readonly IQuestionService service;
