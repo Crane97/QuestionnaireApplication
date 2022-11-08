@@ -16,6 +16,14 @@ namespace QuestionnaireApplication.services
 
         public IEnumerable<Question> Get()
         {
+            List<Question> questionList = repository.Questions.ToList();
+
+            foreach(Question question in questionList)
+            {
+                List<Answer> answerList = repository.Answers.ToList();
+                List<Answer> questionAnswer = answerList.FindAll(answer => answer == question.AnswerText);
+            }
+
             return repository.Questions.ToList();
         }
 
