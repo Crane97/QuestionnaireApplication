@@ -20,9 +20,13 @@ namespace QuestionnaireApplication.services
 
         public User PostUser(User user)
         {
-            repository.Add(user);
-            repository.SaveChanges();
-            return user;
+            if (user.Email != null && user.Email != "")
+            {
+                repository.Add(user);
+                repository.SaveChanges();
+                return user;
+            }
+            return null;
         }
     }
 }
