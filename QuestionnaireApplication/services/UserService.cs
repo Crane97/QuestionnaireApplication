@@ -20,11 +20,24 @@ namespace QuestionnaireApplication.services
 
         public User PostUser(User user)
         {
-            if (user.Email != null && user.Email != "")
+            Boolean flag = true;
+            if (user.Email != null && user.Email != "" )
             {
-                repository.Add(user);
-                repository.SaveChanges();
-                return user;
+                List<User> users = repository.Users.ToList();
+
+                foreach (var user1 in users)
+                {
+                    if(user1.Email == user.Email)
+                    {
+                        flag = false;
+                    }
+                }
+                if (flag)
+                {
+                    repository.Add(user);
+                    repository.SaveChanges();
+                    return user;
+                }
             }
             return null;
         }
